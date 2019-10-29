@@ -1,0 +1,19 @@
+.sidebar{
+  height: 100%;
+}
+.dropzone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+.image-holder{
+  position: relative;
+}
+.image-holder i{
+  position: absolute;
+  top: 3px;
+  right: 11%;
+  cursor: pointer;
+}
