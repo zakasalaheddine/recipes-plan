@@ -1,9 +1,9 @@
 import React from 'react';
 import { Col, Image, Row } from 'react-bootstrap';
-import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 
 
+import ImageUploader from '../image-uploader.component';
 
 const ImageUploaderHolder = ({ images, handleDelete, addNewImage }) => {
     const handleChangeFile = (e) => {
@@ -21,24 +21,9 @@ const ImageUploaderHolder = ({ images, handleDelete, addNewImage }) => {
             console.log(err);
         })
     }
-    const onDrop = (acceptedFiles) => {
-        console.log(acceptedFiles)
-    }
-      
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     return (
         <Row>
-            <Col>
-                <label>Upload New Image</label>
-                <div {...getRootProps()} className="dropzone mx-auto">
-                    <input {...getInputProps()} accept="image/*" onChange={handleChangeFile}/>
-                    {
-                        isDragActive ?
-                        <p>Drop the files here ...</p> :
-                        <p>Drag 'n' drop some files here, or click to select files</p>
-                    }
-                </div>
-            </Col>
+            <ImageUploader handleChangeFile={handleChangeFile} />
             <Col>
                 <Row>
                     {
