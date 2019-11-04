@@ -103,6 +103,7 @@ module.exports = buildSchema(`
 
     type Query {
         categories: [Category!]!
+        category(id: ID!): Category!
         users: [User!]!
         recipes(category: ID): [Recipe!]!
         posts: [Post!]!
@@ -110,15 +111,16 @@ module.exports = buildSchema(`
     }
 
     type Mutation {
-        createCategory(name: String!, parent: ID): Category
-        updateCategory(id: ID!, name: String!, parent: ID, bloqued: Boolean): Category
+        createCategory(name: String!, parent: ID, image: String, bloqued: Boolean): Category
+        updateCategory(id: ID!, name: String!, parent: ID, image: String, bloqued: Boolean): Category
         activateOrDesactivateCategory(id: ID!): Category
 
         register(name: String!, email: String!, password: String!): User
 
         createRecipe(recipe: RecipeInput, category: ID!): Recipe
         updateRecipe(id: ID!, recipe: RecipeInput, category: ID!): Recipe
-        createPost(post: PostInput, category: ID!, user: ID!): Post
+
+        createPost(post: PostInput, category: ID!, recipes: [ID]): Post
 
         addReview(id: ID!, reviewType: ReviewType, review: ReviewInput): [Review!]
     }

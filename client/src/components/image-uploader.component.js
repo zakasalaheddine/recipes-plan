@@ -11,7 +11,7 @@ const ImageUploader = ({ handleChangeFile }) => {
         <Col>
             <label>Upload New Image</label>
             <div {...getRootProps()} className="dropzone mx-auto">
-                <input {...getInputProps()} accept="image/*" onChange={handleChangeFile}/>
+                <input {...getInputProps()} name="image" accept="image/*" onChange={handleChangeFile}/>
                 {
                     isDragActive ?
                     <p>Drop the files here ...</p> :

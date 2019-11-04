@@ -21,14 +21,27 @@ module.exports = {
             throw err;
         }
     },
-    createCategory: async (args) => {
+    category: async ({ id }) => {
         try {
-            console.log(args);
+            const categoriesSelected = await Category.findById(Types.ObjectId(id)).populate('parent');
+            return {
+                ...categoriesSelected._doc,
+                _id: categoriesSelected.id,
+                createdAt: new Date(categoriesSelected.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                updatedAt: new Date(categoriesSelected.updatedAt).toISOString().replace(/T/, ' ').replace(/\..+/, '')
+            };
+        } catch (err) {
+            throw err;
+        }
+    },
+    createCategory: async ({name, parent, image, bloqued}) => {
+        try {
             const category = new Category({
-                name: args.name,
-                slug: slugify(args.name),
-                parent: args.parent != undefined ? args.parent : null,
-                bloqued: false
+                name: name,
+                slug: slugify(name),
+                parent: parent != undefined ? parent : null,
+                image : image,
+                bloqued: bloqued
             });
             let result = await category.save();
             result = {
@@ -37,18 +50,18 @@ module.exports = {
                 createdAt: new Date(result.createdAt).toISOString().replace(/T/, ' ').replace(/\..+/, ''),
                 updatedAt: new Date(result.updatedAt).toISOString().replace(/T/, ' ').replace(/\..+/, '')
             };
-            console.log(result);
             return result;
         } catch (err) {
             throw err;
         }
     },
-    updateCategory: async ({ id, name, parent, bloqued }, req) => {
+    updateCategory: async ({ id, name, parent, image, bloqued }, req) => {
         try {
             const category = await Category.findById(Types.ObjectId(id));
             category.name = name;
             category.slug = slugify(name);
-            category.parent = parent;
+            category.parent = parent != 0 ? parent : null;
+            category.image = image;
             category.bloqued = bloqued != null ? bloqued : category.bloqued;
             const result = await category.save();
             return {
