@@ -56,10 +56,11 @@ module.exports = buildSchema(`
         _id: ID!
         title: String!
         slug: String!
-        category: ID!
-        user: ID!
-        content: String!
+        category: Category!
+        user: User!
+        content: [String!]!
         thumbnail: String!
+        recipes: [ID!]
         reviews: [Review!]
         accepted: Boolean!
         bloqued: Boolean!
@@ -69,8 +70,10 @@ module.exports = buildSchema(`
 
     input PostInput {
         title: String!
-        content: String!
+        content: [String]!
         thumbnail: String!
+        accepted: Boolean!
+        bloqued: Boolean!
     }
 
     input RecipeInput{
@@ -107,6 +110,7 @@ module.exports = buildSchema(`
         users: [User!]!
         recipes(category: ID): [Recipe!]!
         posts: [Post!]!
+        post(id: ID!): Post!
         recipe(recipe: ID!): Recipe!
     }
 
@@ -120,7 +124,8 @@ module.exports = buildSchema(`
         createRecipe(recipe: RecipeInput, category: ID!): Recipe
         updateRecipe(id: ID!, recipe: RecipeInput, category: ID!): Recipe
 
-        createPost(post: PostInput, category: ID!, recipes: [ID]): Post
+        createPost(post: PostInput, category: ID!): Post
+        updatePost(id: ID!, post: PostInput, category: ID!): Post
 
         addReview(id: ID!, reviewType: ReviewType, review: ReviewInput): [Review!]
     }

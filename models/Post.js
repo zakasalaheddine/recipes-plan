@@ -23,14 +23,20 @@ const postSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    content: {
+    content: [{
         type: String,
         required: true,
-    },
+    }],
     thumbnail: {
         type: String,
         required: true
     },
+    recipes: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Recipe'
+        }
+    ],
     reviews: [reviewsSchema],
     accepted: {
         type: Boolean,

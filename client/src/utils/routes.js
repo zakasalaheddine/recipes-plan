@@ -5,6 +5,9 @@ import AddRecipe from '../pages/recipes/add-recipe';
 import Categories from '../pages/categories/categories';
 import EditCategory from '../pages/categories/edit-category';
 import AddCategory from '../pages/categories/add-category';
+import Posts from '../pages/posts/posts';
+import EditPost from '../pages/posts/edit-post';
+import AddPost from '../pages/posts/add-post';
 
 const AppRoutes = [
     {
@@ -59,6 +62,30 @@ const AppRoutes = [
         name: 'Edit Category',
         link: '/categories/:id',
         component: EditCategory,
+        icon: 'fa fa-tags',
+        showInSideBar: false,
+        exact: false
+    },
+    {
+        name: 'Posts',
+        link: '/posts',
+        component: Posts,
+        icon: 'fa fa-tags',
+        showInSideBar: true,
+        exact: true
+    },
+    {
+        name: 'Add Post',
+        link: '/posts/new',
+        component: AddPost,
+        icon: 'fa fa-tags',
+        showInSideBar: false,
+        exact: true
+    },
+    {
+        name: 'Edit POST',
+        link: '/posts/:id',
+        component: EditPost,
         icon: 'fa fa-tags',
         showInSideBar: false,
         exact: false

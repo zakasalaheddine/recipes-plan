@@ -8,7 +8,10 @@ import { FETCH_ALL_CATEGORIES } from './gql';
 import Layout from '../layout';
 const Categories = (props) => {
     const { loading, error, data } = useQuery(FETCH_ALL_CATEGORIES, {
-        fetchPolicy: 'cache-and-network'
+        fetchPolicy: 'cache-and-network',
+        onError(){
+            console.log(error);
+        }
     })
     return (
         <Layout>
@@ -20,11 +23,11 @@ const Categories = (props) => {
             <h1 className='h3 mb-0 text-gray-800'>Categories</h1>
             <hr />
             <Card>
-                {error && ( 
+                {error ? ( 
                     <Alert variant='danger'>
                         {error}
                     </Alert>
-                )}
+                ) : (
                 <Card.Body>
                     {loading ? (<Spinner  animation="grow" />) : (
                         <Table striped responsive bordered size="sm">
@@ -60,6 +63,8 @@ const Categories = (props) => {
                         </Table>
                     )}
                 </Card.Body>
+                )
+            }
             </Card>
         </Layout>
     )
