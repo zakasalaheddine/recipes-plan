@@ -4,6 +4,7 @@ const graphqlHttp = require('express-graphql');
 require('dotenv/config');
 const cors = require('cors');
 const multer = require('multer');
+const isAuth = require('./middleware/is-auth');
 
 const graphQLSchema = require('./graphql/schema');
 const graphQLResolvers = require('./graphql/resolvers/resolvers');
@@ -24,6 +25,7 @@ mongooose.set('useCreateIndex', true);
 mongooose.set('useFindAndModify', false);
 
 app.use(cors());
+app.use(isAuth);
 app.use('/graphql', graphqlHttp({
     schema: graphQLSchema,
     rootValue: graphQLResolvers,
@@ -31,6 +33,9 @@ app.use('/graphql', graphqlHttp({
 }));
 app.use(express.static('public'));
 app.post('/upload', upload.single('file'), (req, res) => {
+    if(!req.isAuth){
+        throw new Error('You need to login to upload');
+    }
     const file = req.file;
     if (!file) {
         throw new Error('Please upload a file')

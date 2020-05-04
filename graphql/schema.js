@@ -98,6 +98,11 @@ module.exports = buildSchema(`
         rating: Int!
         review: String
     }
+    
+    type LoginResult {
+        user: User!
+        access_token: String!
+    }
 
     enum ReviewType{
         recipe
@@ -120,6 +125,7 @@ module.exports = buildSchema(`
         activateOrDesactivateCategory(id: ID!): Category
 
         register(name: String!, email: String!, password: String!): User
+        login(email: String!, password: String!): LoginResult!
 
         createRecipe(recipe: RecipeInput, category: ID!): Recipe
         updateRecipe(id: ID!, recipe: RecipeInput, category: ID!): Recipe

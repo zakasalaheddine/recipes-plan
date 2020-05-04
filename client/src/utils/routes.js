@@ -8,15 +8,26 @@ import AddCategory from '../pages/categories/add-category';
 import Posts from '../pages/posts/posts';
 import EditPost from '../pages/posts/edit-post';
 import AddPost from '../pages/posts/add-post';
+import Login from '../pages/authentication/login';
 
 const AppRoutes = [
+    {
+        name: 'Login',
+        link: '/login',
+        component: Login,
+        icon: '',
+        showInSideBar: false,
+        exact: true,
+        isPrivate: false,
+    },
     {
         name: 'Dashboard',
         link: '/',
         component: Dashboard,
         icon: 'fa fa-tachometer-alt',
         showInSideBar: true,
-        exact: true
+        exact: true,
+        isPrivate: true,
     },
     {
         name: 'Recipes',
@@ -24,7 +35,8 @@ const AppRoutes = [
         component: Recipes,
         icon: 'fa fa-hamburger',
         showInSideBar: true,
-        exact: true
+        exact: true,
+        isPrivate: true,
     },
     {
         name: 'New Recipe',
@@ -32,7 +44,8 @@ const AppRoutes = [
         component: AddRecipe,
         icon: '',
         showInSideBar: false,
-        exact: true
+        exact: true,
+        isPrivate: true,
     },
     {
         name: 'Edit Recipe',
@@ -40,7 +53,8 @@ const AppRoutes = [
         component: EditRecipe,
         icon: '',
         showInSideBar: false,
-        exact: false
+        exact: false,
+        isPrivate: true,
     },
     {
         name: 'Categories',
@@ -48,7 +62,8 @@ const AppRoutes = [
         component: Categories,
         icon: 'fa fa-tags',
         showInSideBar: true,
-        exact: true
+        exact: true,
+        isPrivate: true,
     },
     {
         name: 'Add Category',
@@ -56,7 +71,8 @@ const AppRoutes = [
         component: AddCategory,
         icon: 'fa fa-tags',
         showInSideBar: false,
-        exact: true
+        exact: true,
+        isPrivate: true,
     },
     {
         name: 'Edit Category',
@@ -64,7 +80,8 @@ const AppRoutes = [
         component: EditCategory,
         icon: 'fa fa-tags',
         showInSideBar: false,
-        exact: false
+        exact: false,
+        isPrivate: true,
     },
     {
         name: 'Posts',
@@ -72,7 +89,8 @@ const AppRoutes = [
         component: Posts,
         icon: 'fa fa-tags',
         showInSideBar: true,
-        exact: true
+        exact: true,
+        isPrivate: true,
     },
     {
         name: 'Add Post',
@@ -80,7 +98,8 @@ const AppRoutes = [
         component: AddPost,
         icon: 'fa fa-tags',
         showInSideBar: false,
-        exact: true
+        exact: true,
+        isPrivate: true,
     },
     {
         name: 'Edit POST',
@@ -88,7 +107,8 @@ const AppRoutes = [
         component: EditPost,
         icon: 'fa fa-tags',
         showInSideBar: false,
-        exact: false
+        exact: false,
+        isPrivate: true,
     },
 ];
 

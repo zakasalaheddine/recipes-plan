@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 const client = new ApolloClient({
     uri: 'http://localhost:9000/graphql',
+    credentials: 'same-origin',
     cache: new InMemoryCache({
         addTypename: false
     })
